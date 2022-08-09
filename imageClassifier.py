@@ -21,15 +21,22 @@ fashion_mnist = keras.datasets.fashion_mnist
 print(train_labels[0])
 print(train_images[0])
 
-# show image, grayscaled
+# show image, grayscaled, 0 to 255 means 2^6 (8 bit image black and white)
 plt.imshow(train_images[0], cmap='gray', vmin=0, vmax=255)
 plt.show()
 
 # Define neural net structure
 model = keras.Sequential([
-    # input layer (compatible with dataset)
-    # one flat layer of our data
-    keras.layers.Flatten(input_shape=(28, 28))
 
+    # create input layer
+    # input is a 28x28 image ("Flattens" the 28x28 into a single 784x1 input layer)
+    # we flatten it to simplify the structure of the neural net, since we want 
+    # one entire column for the data
+    keras.layers.Flatten(input_shape=(28, 28)),
+
+    # create output layer
+    # output is 0-10 (depending on clothing). return maximum
+    # 10 nodes corresponding to label (label is # for each clothing (ie. 1 = trouser))
+    keras.layers.Dense(10, activation=tf.nn.softmax)
 
 ])
