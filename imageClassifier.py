@@ -37,6 +37,6 @@ model = keras.Sequential([
     # create output layer
     # output is 0-10 (depending on clothing). return maximum
     # 10 nodes corresponding to label (label is # for each clothing (ie. 1 = trouser))
-    keras.layers.Dense(10, activation=tf.nn.softmax)
+    keras.layers.Dense(units=10, activation=tf.nn.softmax)
 
 ])
