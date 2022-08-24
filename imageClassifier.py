@@ -1,3 +1,4 @@
+from pickletools import optimize
 import tensorflow as tf
 
 # Read image data using numpy
@@ -34,9 +35,19 @@ model = keras.Sequential([
     # one entire column for the data
     keras.layers.Flatten(input_shape=(28, 28)),
 
+    # hidden layer is 128 deep. relu returns the value, or  0
+    keras.layers.Dense(128, activation=tf.nn.relu),
+
+
     # create output layer
     # output is 0-10 (depending on clothing). return maximum
     # 10 nodes corresponding to label (label is # for each clothing (ie. 1 = trouser))
     keras.layers.Dense(units=10, activation=tf.nn.softmax)
 
 ])
+
+# Compile model
+# loss is the loss function
+# optimize will correct the loss detected by loss function
+# essentially makes changes to weights
+model.compile(optimize=tf.optimizers.Adam(), loss='sparse_categorical_crossentropy')
