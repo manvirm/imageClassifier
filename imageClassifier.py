@@ -36,12 +36,14 @@ model = keras.Sequential([
     keras.layers.Flatten(input_shape=(28, 28)),
 
     # hidden layer is 128 deep. relu returns the value, or  0
+    # activation filters data
     keras.layers.Dense(128, activation=tf.nn.relu),
 
 
     # create output layer
     # output is 0-10 (depending on clothing). return maximum
     # 10 nodes corresponding to label (label is # for each clothing (ie. 1 = trouser))
+    # softmax gets the max value
     keras.layers.Dense(units=10, activation=tf.nn.softmax)
 
 ])
@@ -51,3 +53,13 @@ model = keras.Sequential([
 # optimize will correct the loss detected by loss function
 # essentially makes changes to weights
 model.compile(optimize=tf.optimizers.Adam(), loss='sparse_categorical_crossentropy')
+
+# Train model using training data
+# epoch is how many times we want to go through the optimizations
+model.fit(train_images, train_labels, epochs=5)
+
+# Test our model using test data
+test_loss = model.evaluate(test_images, test_labels)
+
+# Make predictions
+predictions = model.predict(test_images)
