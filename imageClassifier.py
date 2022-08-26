@@ -52,7 +52,7 @@ model = keras.Sequential([
 # loss is the loss function
 # optimize will correct the loss detected by loss function
 # essentially makes changes to weights
-model.compile(optimize=tf.optimizers.Adam(), loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+model.compile(optimizer=tf.optimizers.Adam(), loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
 # Train model using training data
 # epoch is how many times we want to go through the optimizations
